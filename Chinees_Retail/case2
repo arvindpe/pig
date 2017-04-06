@@ -1,0 +1,46 @@
+--find no of order place and total sale in each month
+
+Retail= load '/home/hduser/Desktop/pig/Chinees_Retail/RetailData/D11' using PigStorage(';') as (date,custid:int,agegroup,pin,category:int,prodid:int,quantity:int,cost:double,salecost:double);
+
+
+
+order_and_sale_month11 = foreach Retail generate COUNT(Retail) as orders,SUM(salecost) as total;
+
+dump order_and_sale_month11;
+
+223622,29011236
+
+
+
+-------------------------------------------------------------------------------------------------------------
+Retail= load '/home/hduser/Desktop/pig/Chinees_Retail/RetailData/D12' using PigStorage(';') as (date,custid:int,agegroup,pin,category:int,prodid:int,quantity:int,cost:double,salecost:double);
+
+
+
+order_and_sale_month12 = foreach Retail generate COUNT(Retail) as orders,SUM(salecost) as total;
+
+dump order_and_sale_month12;
+178216,23302410
+
+
+-----------------------------------------------------------------------------------------------------------------------
+Retail= load '/home/hduser/Desktop/pig/Chinees_Retail/RetailData/D01' using PigStorage(';') as (date,custid:int,agegroup,pin,category:int,prodid:int,quantity:int,cost:double,salecost:double);
+
+
+
+order_and_sale_month01 = foreach Retail generate COUNT(Retail) as orders,SUM(salecost) as total;
+
+dump order_and_sale_month01;
+216864,30688479
+
+
+
+-------------------------------------------------------------------------------------------------------------------------------
+Retail= load '/home/hduser/Desktop/pig/Chinees_Retail/RetailData/D01' using PigStorage(';') as (date,custid:int,agegroup,pin,category:int,prodid:int,quantity:int,cost:double,salecost:double);
+
+
+
+order_and_sale_month02 = foreach Retail generate COUNT(Retail) as orders,SUM(salecost) as total;
+
+dump order_and_sale_month02;
+199039,24837951

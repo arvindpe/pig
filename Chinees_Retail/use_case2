@@ -1,0 +1,23 @@
+--Find out the top 4 or top 10 product being sold in the monthly basis and in 
+--all the 4 months
+
+Retail= load '/home/hduser/Desktop/pig/Chinees_Retail/RetailData' using PigStorage(';') as (date,custid:int,agegroup,pin,category:int,prodid:int,quantity:int,cost:double,salecost:double);
+
+sale = group Retail by $5;
+
+sales = foreach sale generate group as prod_id,SUM(Retail.salecost) as salecost;
+
+ordered_sale = order sales by $1 desc;
+
+result = limit ordered_sale 4;
+
+dump result;
+
+
+result is:for all the 4 month data
+
+(,9.8736073E7)
+(20553418,470501.0)
+(20564100,189113.0)
+(20556433,141598.0)
+

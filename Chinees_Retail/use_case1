@@ -1,0 +1,18 @@
+//Find out the customer I.D for the customer who has spent the maximum amount 
+//in a month and in all the 4 months.
+
+
+Retail= load '/home/hduser/Desktop/pig/Chinees_Retail/RetailData' using PigStorage(';') as (date,custid:int,agegroup,pin,category:int,prodid:int,quantity:int,cost:double,salecost:double);
+
+sale = group Retail by $1;
+
+sales = foreach sale generate group as custid,SUM(Retail.salecost) as salecost;
+
+ordered_sale = order sales by $1 desc;
+
+result = limit ordered_sale 1;
+
+dump result;
+
+
+

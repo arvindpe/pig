@@ -1,0 +1,14 @@
+--find no of order place by the each  customer and his total sale
+
+Retail= load '/home/hduser/Desktop/pig/Chinees_Retail/RetailData' using PigStorage(';') as (date,custid:int,agegroup,pin,category:int,prodid:int,quantity:int,cost:double,salecost:double);
+
+
+
+sale = group Retail by custid;
+
+order_and_sale = foreach sale generate group as custid,COUNT(Retail) as orders,SUM(Retail.salecost) as total;
+
+dump order_and_sale;
+
+
+

@@ -1,0 +1,9 @@
+book data 
+
+book id, price , auther_id
+
+
+auther data----auther id, auther name.
+
+
+find the name of auther whose name start with j and their book price more than 200

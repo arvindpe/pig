@@ -1,0 +1,13 @@
+--find product list with Quantity,profitability and margin%
+
+Retail= load '/home/hduser/Desktop/pig/Chinees_Retail/RetailData' using PigStorage(';') as (date,custid:int,agegroup,pin,category:int,prodid:int,quantity:int,cost:double,salecost:double);
+
+sale = group Retail by $5;
+
+detailsale = foreach sale generate group as prod_id,SUM(Retail.quantity) as qty,SUM(Retail.cost) as total_cost,SUM(Retail.salecost) as total_sale;
+
+gain = foreach detailsale generate $0,$1,ROUND_TO(($3-$2),2),ROUND_TO((($3-$2)*100/$2),2);
+
+order_gain = order gain by $3 desc;
+
+dump order_gain;
